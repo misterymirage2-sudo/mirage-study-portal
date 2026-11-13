@@ -112,7 +112,7 @@
 <header>
     <h1>Mirage's Ultimate Astonishing Study Portal Pro</h1>
     <p style="color: var(--muted); max-width: 680px; margin: 0 auto;">
-        Interactive Marks Evaluator, 9-Subject Exhaustive Textbook Archive, Instant AI Study Assistant & Windows Desktop Software.
+        Interactive Marks Evaluator, 9-Subject Exhaustive Textbook Archive, AI Study Assistant & Windows Desktop Software.
     </p>
     <div class="top-controls">
         <button onclick="toggleTheme()">🌙 / ☀️ Toggle Theme</button>
@@ -125,7 +125,7 @@
 
 <div class="container">
 
-    <!-- INSTANT AI ASSISTANT PANEL (NO KEY REQUIRED) -->
+    <!-- AI ASSISTANT PANEL -->
     <div class="panel hidden" id="aiPanel">
         <h2 style="color: #9333ea;">🤖 Mirage AI Study Assistant</h2>
         <p style="color: var(--muted); font-size: 0.9rem;">Ask any academic or technical question below. The assistant is ready instantly with zero setup required!</p>
@@ -260,7 +260,6 @@
         box.innerText += `You: ${prompt}\n⏳ Analyzing...\n\n`;
         document.getElementById("aiQueryInput").value = "";
         
-        // Smart built-in knowledge responses for instant offline/keyless reliability
         setTimeout(() => {
             let reply = "";
             const lower = prompt.toLowerCase();
@@ -273,7 +272,7 @@
             } else {
                 reply = `Great question regarding "${prompt}!". Review the exhaustive textbook chapters in the Distinction Library or explore related problem sets for step-by-step mastery.`;
             }
-            box.innerText += `Mirage AI: ${reply}\n\n`;
+            box.innerText += `AI: ${reply}\n\n`;
             box.scrollTop = box.scrollHeight;
         }, 600);
     }
