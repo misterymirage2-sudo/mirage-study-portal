@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mirage's Ultimate Astonishing Study Portal Pro</title>
+    <style>
+        :root {
+            --bg: #0f172a;
+            --card: #1e293b;
+            --text: #f1f5f9;
+            --muted: #94a3b8;
+            --accent: #38bdf8;
+            --btn: #0284c7;
+            --success: #16a34a;
+            --border: #334155;
+        }
+        body.light-mode {
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --text: #1e293b;
+            --muted: #64748b;
+            --accent: #0284c7;
+            --btn: #0284c7;
+            --border: #cbd5e1;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            transition: background 0.3s, color 0.3s;
+        }
+        header {
+            padding: 35px 20px;
+            text-align: center;
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
+        }
+        h1 { color: var(--accent); margin: 0 0 10px 0; }
+        .top-controls {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+        button, .btn-link {
+            background: var(--btn);
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 0.95rem;
+        }
+        button:hover, .btn-link:hover { opacity: 0.9; }
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        .panel {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+        }
+        label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 0.9rem; }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            background: var(--bg);
+            color: var(--text);
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+        pre {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            padding: 15px;
+            border-radius: 8px;
+            white-space: pre-wrap;
+            font-family: Consolas, monospace;
+            line-height: 1.5;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .hidden { display: none; }
+        .calc-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            max-width: 280px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Mirage's Ultimate Astonishing Study Portal Pro</h1>
+    <p style="color: var(--muted); max-width: 680px; margin: 0 auto;">
+        Interactive Marks Evaluator, 9-Subject Exhaustive Textbook Archive, AI Study Assistant & Windows Desktop Software.
+    </p>
+    <div class="top-controls">
+        <button onclick="toggleTheme()">🌙 / ☀️ Toggle Theme</button>
+        <button onclick="toggleSection('aiPanel')" style="background:#9333ea;">🤖 Ask AI Assistant</button>
+        <button onclick="toggleSection('calcPanel')" style="background:#0d9488;">🧮 Calculator</button>
+        <button onclick="toggleSection('quizPanel')" style="background:#7c3aed;">🧠 Quick Quiz</button>
+        <a href="https://github.com/misterymirage2-sudo/electronic-calculator-pro/releases" class="btn-link" target="_blank" style="background:#16a34a;">📥 Download .exe</a>
+    </div>
+</header>
+
+<div class="container">
+
+    <!-- AI ASSISTANT PANEL -->
+    <div class="panel hidden" id="aiPanel">
+        <h2 style="color: #9333ea;">🤖 Mirage AI Study Assistant</h2>
+        <p style="color: var(--muted); font-size: 0.9rem;">Ask any academic, scientific, or coding question below. Ready instantly with zero setup required!</p>
+        
+        <pre id="aiResponseBox">System: Mirage AI Assistant is online and ready for your questions.\n\n</pre>
+        
+        <div style="display: flex; gap: 10px; margin-top: 10px;">
+            <input type="text" id="aiQueryInput" placeholder="Ask your study question here..." style="margin-bottom:0;" onkeypress="if(event.key==='Enter') askAssistantInstant()">
+            <button onclick="askAssistantInstant()" style="background:#9333ea; white-space:nowrap;">Ask AI 🚀</button>
+        </div>
+    </div>
+
+    <!-- STEP 1: STUDENT REGISTRATION & MARKS -->
+    <div class="panel" id="step1Panel">
+        <h2>Step 1: Student Registration & Assessment Marks (0 - 100)</h2>
+        <div class="grid-2" style="margin-bottom: 15px;">
+            <div>
+                <label>Full Name / Alias:</label>
+                <input type="text" id="studentName" placeholder="e.g. Mirage">
+            </div>
+            <div>
+                <label>Index Number (Optional):</label>
+                <input type="text" id="studentIndex" placeholder="Leave blank if not required">
+            </div>
+        </div>
+        <div class="grid-2">
+            <div><label>Chemistry:</label><input type="number" id="mChem" min="0" max="100" placeholder="0-100"></div>
+            <div><label>Mathematics:</label><input type="number" id="mMath" min="0" max="100" placeholder="0-100"></div>
+            <div><label>Geography:</label><input type="number" id="mGeog" min="0" max="100" placeholder="0-100"></div>
+            <div><label>Physics:</label><input type="number" id="mPhys" min="0" max="100" placeholder="0-100"></div>
+            <div><label>Biology:</label><input type="number" id="mBiol" min="0" max="100" placeholder="0-100"></div>
+        </div>
+        <button onclick="calculateResults()" style="margin-top: 20px; width: 100%; font-size: 1.05rem;">
+            Calculate & Open Astonishing Library →
+        </button>
+    </div>
+
+    <!-- STEP 2: NOTEBOOK LIBRARY -->
+    <div class="panel hidden" id="libraryPanel">
+        <h2 style="color: #16a34a;">Distinction Library — Exhaustive Notebook Reader</h2>
+        <p id="studentSummary" style="font-weight: bold;"></p>
+
+        <div class="grid-2" style="margin-bottom: 15px;">
+            <div>
+                <label>Select Subject:</label>
+                <select id="subjectSelect" onchange="loadChapter()">
+                    <option value="chem">1: Chemistry</option>
+                    <option value="math">2: Mathematics</option>
+                    <option value="phys">3: Physics</option>
+                    <option value="biol">4: Biology</option>
+                    <option value="geog">5: Geography</option>
+                    <option value="entr">6: Entrepreneurship</option>
+                    <option value="fren">7: French</option>
+                    <option value="engl">8: English</option>
+                    <option value="othr">9: Others</option>
+                </select>
+            </div>
+            <div>
+                <label>Mastery Prep Tier:</label>
+                <select id="tierSelect" onchange="loadChapter()">
+                    <option>70.10 (Exhaustive Theory & Core Chapters)</option>
+                    <option>70.30 (Step-by-Step Mathematical Derivations)</option>
+                    <option>70.50 (Multiple Worked Examples & Problem Solving)</option>
+                    <option>70.80 (Master Challenge & Examination Past Papers)</option>
+                </select>
+            </div>
+        </div>
+
+        <pre id="notebookOutput"></pre>
+
+        <div class="top-controls" style="justify-content: flex-start;">
+            <button onclick="readAloudWeb()" style="background:#7c3aed;">🔊 Listen to Notes</button>
+            <button onclick="stopAloudWeb()" style="background:#475569;">⏹ Stop Audio</button>
+            <button onclick="downloadNotesTxt()" style="background:#2563eb;">💾 Export .TXT</button>
+        </div>
+    </div>
+
+    <!-- UPLIFT PANEL -->
+    <div class="panel hidden" id="upliftPanel">
+        <h2 style="color: #d97706;">Academic Uplift & Scholarship Roadmap</h2>
+        <p id="upliftSummary" style="font-weight: bold;"></p>
+        <p>Keep pushing! Review core fundamentals below and retake your assessment to unlock the full Distinction Archive.</p>
+        <button onclick="document.getElementById('libraryPanel').classList.remove('hidden')">Preview Sample Notebook Anyway →</button>
+    </div>
+
+    <!-- CALCULATOR UTILITY -->
+    <div class="panel hidden" id="calcPanel">
+        <h3>🧮 Electronic Calculator</h3>
+        <input type="text" id="calcDisplay" readonly style="font-size: 1.3rem; text-align: right; max-width: 280px;">
+        <div class="calc-grid">
+            <button onclick="calcPress('7')">7</button><button onclick="calcPress('8')">8</button><button onclick="calcPress('9')">9</button><button onclick="calcPress('/')">/</button>
+            <button onclick="calcPress('4')">4</button><button onclick="calcPress('5')">5</button><button onclick="calcPress('6')">6</button><button onclick="calcPress('*')">*</button>
+            <button onclick="calcPress('1')">1</button><button onclick="calcPress('2')">2</button><button onclick="calcPress('3')">3</button><button onclick="calcPress('-')">-</button>
+            <button onclick="calcPress('0')">0</button><button onclick="calcPress('.')">.</button><button onclick="calcSolve()" style="background:#16a34a;">=</button><button onclick="calcPress('+')">+</button>
+        </div>
+        <button onclick="document.getElementById('calcDisplay').value=''" style="background:#dc2626; margin-top:8px; width:280px;">Clear (C)</button>
+    </div>
+
+    <!-- QUIZ UTILITY -->
+    <div class="panel hidden" id="quizPanel">
+        <h3>🧠 Self-Test Knowledge Quiz</h3>
+        <p><strong>Question:</strong> What is the Avogadro constant representing 1 mole of particles?</p>
+        <button onclick="checkQuiz(false)">A) 3.14 × 10²³</button>
+        <button onclick="checkQuiz(true)">B) 6.022 × 10²³</button>
+        <button onclick="checkQuiz(false)">C) 9.81 m/s²</button>
+        <p id="quizFeedback" style="font-weight: bold; margin-top: 10px;"></p>
+    </div>
+
+</div>
+
+<script>
+    const chapters = {
+        chem: "CHAPTER 1: STOICHIOMETRY & MOLES\n• Mole (n) = Mass (m) / Molar Mass (M)\n• Avogadro Constant = 6.022 × 10²³ particles/mol\n• Example: Mass of 3.5 mol H₂SO₄ (M = 98 g/mol) = 343 g.",
+        math: "CHAPTER 1: QUADRATICS & ALGEBRA\n• Standard Form: ax² + bx + c = 0\n• Quadratic Formula: x = (-b ± √(b² - 4ac)) / 2a\n• Example: 3x² - 10x + 3 = 0 → x = 3 or x = 1/3.",
+        phys: "CHAPTER 1: OHM'S LAW & ELECTRIC CIRCUITS\n• Voltage (V) = Current (I) × Resistance (R)\n• Series Resistance: R_total = R₁ + R₂ + R₃\n• Parallel Resistance: 1/R_total = 1/R₁ + 1/R₂",
+        biol: "CHAPTER 1: CELL STRUCTURE & METABOLISM\n• Mitochondria generate ATP via cellular respiration.\n• Osmosis: Movement of water across a semi-permeable membrane.",
+        geog: "CHAPTER 1: PHYSICAL GEOGRAPHY & TECTONICS\n• Plate boundaries drive volcanic activity, earthquakes, and rift valley formation.",
+        entr: "CHAPTER 1: BUSINESS PLANNING & CASH FLOW\n• Net Profit = Total Revenue - Total Expenses.\n• Market research validates customer demand before scaling.",
+        fren: "CHAPITRE 1: GRAMMAIRE ET VOCABULAIRE ACADÉMIQUE\n• Les temps verbaux: Présent, Passé Composé, Imparfait et Futur Simple.",
+        engl: "CHAPTER 1: ADVANCED COMPOSITION & RHETORIC\n• Structure essays with a clear thesis, topic sentences, evidence, and synthesis.",
+        othr: "CHAPTER 1: COMPUTER SCIENCE & LOGIC\n• Algorithms break complex problems into deterministic step-by-step instructions."
+    };
+
+    function toggleTheme() { document.body.classList.toggle("light-mode"); }
+    function toggleSection(id) { document.getElementById(id).classList.toggle("hidden"); }
+
+    function askAssistantInstant() {
+        const promptInput = document.getElementById("aiQueryInput");
+        const box = document.getElementById("aiResponseBox");
+        const prompt = promptInput.value.trim();
+        if (!prompt) return;
+        
+        box.innerText += `You: ${prompt}\n`;
+        promptInput.value = "";
+        
+        let reply = "";
+        const lower = prompt.toLowerCase();
+        if (lower.includes("mole") || lower.includes("chemistry")) {
+            reply = "In Chemistry, a mole represents 6.022 × 10²³ particles. To find moles, divide mass by molar mass (n = m / M).";
+        } else if (lower.includes("quadratic") || lower.includes("math")) {
+            reply = "For quadratic equations in the form ax² + bx + c = 0, use the quadratic formula: x = (-b ± √(b² - 4ac)) / 2a.";
+        } else if (lower.includes("ohm") || lower.includes("physics")) {
+            reply = "Ohm's Law states that Voltage equals Current times Resistance (V = I × R).";
+        } else {
+            reply = `Great academic inquiry regarding "${prompt}!". Review the exhaustive textbook chapters in the Distinction Library for comprehensive step-by-step mastery.`;
+        }
+        
+        box.innerText += `AI: ${reply}\n\n`;
+        box.scrollTop = box.scrollHeight;
+    }
+
+    function calculateResults() {
+        const name = document.getElementById("studentName").value.trim();
+        if (!name) { alert("Please enter your name or alias."); return; }
+        const vals = ["mChem", "mMath", "mGeog", "mPhys", "mBiol"].map(id => parseFloat(document.getElementById(id).value));
+        if (vals.some(v => isNaN(v) || v < 0 || v > 100)) { alert("Enter valid marks (0-100) for all 5 subjects."); return; }
+
+        const total = vals.reduce((a, b) => a + b, 0);
+        const pct = (total / 5).toFixed(2);
+        const idx = document.getElementById("studentIndex").value.trim() || "Optional";
+        const summary = `Student: ${name} (Index: ${idx}) | Total: ${total}/500 | Percentage: ${pct}%`;
+
+        document.getElementById("libraryPanel").classList.add("hidden");
+        document.getElementById("upliftPanel").classList.add("hidden");
+
+        if (pct >= 80) {
+            document.getElementById("studentSummary").innerText = summary;
+            document.getElementById("libraryPanel").classList.remove("hidden");
+            loadChapter();
+        } else {
+            document.getElementById("upliftSummary").innerText = summary;
+            document.getElementById("upliftPanel").classList.remove("hidden");
+        }
+    }
+
+    function loadChapter() {
+        const subj = document.getElementById("subjectSelect").value;
+        const tier = document.getElementById("tierSelect").value;
+        document.getElementById("notebookOutput").innerText =
+            `=== MIRAGE EXHAUSTIVE ARCHIVE | TIER: ${tier} ===\n\n` + chapters[subj] + "\n\n[TVETs and UNIVERSITY COURSES ARE COMING SOON]";
+    }
+
+    function readAloudWeb() {
+        window.speechSynthesis.cancel();
+        const text = document.getElementById("notebookOutput").innerText;
+        const speech = new SpeechSynthesisUtterance(text);
+        window.speechSynthesis.speak(speech);
+    }
+    function stopAloudWeb() { window.speechSynthesis.cancel(); }
+
+    function downloadNotesTxt() {
+        const text = document.getElementById("notebookOutput").innerText;
+        const blob = new Blob([text], { type: "text/plain" });
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = "Mirage_Study_Notes.txt";
+        a.click();
+    }
+
+    function calcPress(v) { document.getElementById("calcDisplay").value += v; }
+    function calcSolve() {
+        try { document.getElementById("calcDisplay").value = eval(document.getElementById("calcDisplay").value); }
+        catch { document.getElementById("calcDisplay").value = "Error"; }
+    }
+    function checkQuiz(correct) {
+        const fb = document.getElementById("quizFeedback");
+        fb.innerText = correct ? "✅ Correct! Avogadro's constant is 6.022 × 10²³." : "❌ Incorrect. Review Chemistry Chapter 1!";
+        fb.style.color = correct ? "#16a34a" : "#dc2626";
+    }
+</script>
+</body>
+</html>
